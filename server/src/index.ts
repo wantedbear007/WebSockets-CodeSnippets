@@ -7,10 +7,27 @@ const server = http.createServer(function (request: any, response: any) {
   response.end("hii there");
 });
 
+// for rooms 
+/*
+const connectedUsers: {
+  socket: WebSocket,
+  room: String
+}[]  = [] -> this array will maintain the number of users connected along with their details
+*/
+
 let userCount: number = 0;
 const wss = new WebSocketServer({ server });
 
 wss.on("connection", function connection(socketInstance) {
+  // for room
+  // connectedUsers.push({socketInstance, room="ROOM_ID"})
+
+  /*
+      to send
+      connectedUsers.forEach((client) => {
+        if (client.room === "bhanu") client.socketInstance.send("hii bhanu !")
+      })
+  */
   socketInstance.on("err", console.error);  
   userCount++;
   socketInstance.on("message", function message(data, isBinary) {
